@@ -2,5 +2,12 @@
 
 ## Install Expo CLI
 ```
-npm install -g expo-cli
+sudo npm install -g expo-cli
 ```
+
+## To run
+```
+npm start 
+```
+
+## Download "Expo Go" to Android or IOS
