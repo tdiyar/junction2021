@@ -10,4 +10,4 @@ sudo npm install -g expo-cli
 npm start 
 ```
 
-## Download "Expo Go" to Android or IOS
+Download "Expo Go" to Android or IOS
