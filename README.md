@@ -3,6 +3,7 @@
 ## Install Expo CLI
 ```
 sudo npm install -g expo-cli
+expo install react-native-maps
 ```
 
 ## To run
