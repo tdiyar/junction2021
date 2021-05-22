@@ -3,10 +3,12 @@ import React, {useState, useRef} from 'react';
 import MapView, {Callout, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
 
-import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TextInput, Button } from 'react-native';
 import PercentSign from './PercentSign.js'
+
 import FixModal from './FixModal.js'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon_d from 'react-native-vector-icons/FontAwesome';
+import { Icon } from 'react-native-elements'
 
 
 
@@ -37,14 +39,13 @@ export default function Map({navigation}) {
       > 
 
     { nodes.map ( (place)=> <Marker  onPress={() =>setModal(true)}  key={place.id} title = {place.tile} coordinate={place.coordinate} >
-    <Icon name="wrench" size={30} color="#900"    />
+    <Icon_d name="wrench" size={30} color="#900"    />
     </Marker>  ) }
         
       </MapView>
 
       <PercentSign coordinate = { coordinate }  >  </PercentSign>
       
-
       <View style={styles.input}>
         <TextInput
           style={{
@@ -61,6 +62,9 @@ export default function Map({navigation}) {
           placeholder={'Search'}
           placeholderTextColor={'#666'}
         />
+      </View>
+      <View style={styles.menu}>
+        <Icon name='menu' style = {{margin: 10, height: 45,}} onPress={() => navigation.openDrawer()}></Icon>
       </View>
     </View>
   );
@@ -80,6 +84,12 @@ const styles = StyleSheet.create({
   input: {
     position: 'absolute',
     top: 30,
-    width: '100%'
+    width: '90%',
   },
+  menu: {
+    position: 'absolute',
+    top:40,
+    left:10,
+    width:'10%',
+  }
 });
