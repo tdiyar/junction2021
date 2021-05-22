@@ -1,35 +1,41 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import Geocoder from 'react-native-geocoding';
 
 import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
 import PercentSign from './PercentSign.js'
 
+import axios from "axios";
 
 export default function Map({navigation}) {
+  
+  const [coordinate, setCoordinate] = useState( {longitudeDelta:200, latitudeDelta:300, latitude:36.3535152, longitude:127.3420604  }); 
+
 
   const nodes = [ {id:1, title:"comthign",  coordinate:{latitude:36.3533152, longitude:127.3420604} },
   {id:2, title: "comthign",  coordinate:{latitude:36.3535152, longitude:127.3420604} },
   { id:3,title: "comthign",  coordinate:{latitude:36.3532152, longitude:127.3430604} },
   { id:4, title:"comthign",  coordinate:{latitude:36.3531152, longitude:127.3420614} },
-    ]
-
-    const [coordinate, setCoordinate] = useState( {longitudeDelta:200, latitudeDelta:300  }); 
-    
-    const consolLog = (e) => {
-        console.log(e)
-    }
+  ]
 
   return (
     <View style={styles.container}>
-      <MapView 
-        loadingEnabled={true} 
-        style={styles.map} 
-        onPress={() => navigation.navigate('PlaceInfoPage', { place: 'KAIST' })}      
-        onRegionChangeComplete = {(e)=>setCoordinate(e)}> 
-        { nodes.map ( (place)=> <Marker key={place.id} title = {place.tile} coordinate={place.coordinate} />  ) }    
+      <MapView loadingEnabled={true} style={styles.map} 
+      onRegionChangeComplete = {(e)=>{
+        setCoordinate(e);
+        
+      } }
+      onPress={() => navigation.navigate('PlaceInfoPage', { place: 'KAIST' })}      
+      provider={PROVIDER_GOOGLE}
+      > 
+
+        { nodes.map ( (place)=> <Marker key={place.id} title = {place.tile} coordinate={place.coordinate} />  ) }
+        
       </MapView>
-      <PercentSign coordinate = { coordinate } >  </PercentSign>
+
+      <PercentSign coordinate = { coordinate }  >  </PercentSign>
+      
 
       <View style={styles.input}>
         <TextInput
