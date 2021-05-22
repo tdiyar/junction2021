@@ -17,7 +17,11 @@ export default function Map({navigation}) {
   const [coordinate, setCoordinate] = useState( {longitudeDelta:200, latitudeDelta:300, latitude:36.3535152, longitude:127.3420604  }); 
   const [modal, setModal] = useState(false );
 
-  const nodes = [ {id:1, title:"comthign",  coordinate:{latitude:36.3533152, longitude:127.3420604} },
+  const nodes = [ 
+  {id:1, title:"comthign",  coordinate:{latitude:36.3533152, longitude:127.3620604} },
+  {id:5, title:"comthign",  coordinate:{latitude:36.3283152, longitude:127.3820604} },
+  {id:6, title:"comthign",  coordinate:{latitude:36.3363152, longitude:127.3780604} },
+  {id:7, title:"comthign",  coordinate:{latitude:36.3213152, longitude:127.3890604} },
   {id:2, title: "comthign",  coordinate:{latitude:36.3535152, longitude:127.3450604} },
   { id:3,title: "comthign",  coordinate:{latitude:36.3432152, longitude:127.1430604} },
   { id:4, title:"comthign",  coordinate:{latitude:36.3131152, longitude:127.4420614} },
