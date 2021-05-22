@@ -31,11 +31,30 @@ function PlaceInfoPage({navigation, route}) {
                 </View>
             </View>
             <View style={styles.separator}/>
+            <View style={styles.content}>
+                <Text style={styles.contentTitle}> Overview </Text>    
+                <Text> Address: 291 Daehak-ro, Eoeun-dong, Yuseong-gu, Daejeon </Text>
+                <Text> Open hours: 09:00-18:00 Mon-Fri </Text>
+                <Text> Phone: 042-350-2114 </Text>    
+            </View>
+            <View style={styles.separator}/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    contentTitle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 10
+    },
+    content: {
+        padding: 10,
+        borderBottomColor: '#D3D3D3',
+        borderBottomWidth: 2,
+        borderTopColor: '#D3D3D3',
+        borderTopWidth: 2,
+    },
     header: {
         paddingBottom: 10,
         borderBottomColor: '#D3D3D3',
