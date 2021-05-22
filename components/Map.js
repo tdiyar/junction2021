@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import MapView, {Marker} from 'react-native-maps';
 
-import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TextInput, Button } from 'react-native';
 import PercentSign from './PercentSign.js'
 
 
@@ -30,7 +30,9 @@ export default function Map({navigation}) {
         { nodes.map ( (place)=> <Marker key={place.id} title = {place.tile} coordinate={place.coordinate} />  ) }    
       </MapView>
       <PercentSign coordinate = { coordinate } >  </PercentSign>
-
+      <View style={styles.container}>
+        <Button onPress={() => navigation.openDrawer()} style={{}} title="SideBar"></Button>
+      </View>
       <View style={styles.input}>
         <TextInput
           style={{
