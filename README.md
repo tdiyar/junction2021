@@ -12,3 +12,6 @@ npm start
 ```
 
 Download "Expo Go" to Android or IOS
+
+## To emulate
+https://docs.expo.io/workflow/android-studio-emulator/
