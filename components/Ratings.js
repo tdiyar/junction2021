@@ -10,7 +10,7 @@ import { DataTable } from 'react-native-paper';
 export default function Ratings({navigation}) {
     var percent = "54%";
     const table = country_list.map((entry) => 
-      <DataTable.Row>
+      <DataTable.Row onPress={()=> ( navigation.navigate('CountryInfoPage') )} >
         <DataTable.Cell>{entry.number}</DataTable.Cell>
         <DataTable.Cell>{entry.name}</DataTable.Cell>
         <DataTable.Cell>{((parseInt(entry.index) * 3413 + (parseInt(entry.index) + entry.name.length) * 1324637) % 71) + 12}</DataTable.Cell>

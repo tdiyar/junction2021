@@ -7,6 +7,7 @@ import Map from './components/Map.js'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PlaceInfoPage from './components/PlaceInfoPage.js';
+import CountryInfoPage from './components/CountryInfoPage.js';
 import Ratings from './components/Ratings';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -19,6 +20,12 @@ function Stacks(){
           component={Map}
           options={{ headerShown: false }}
         />
+        <Stack.Screen 
+          name="CountryInfoPage" 
+          component={CountryInfoPage}
+          options={{ headerShown: false }}
+        />
+        
         <Stack.Screen 
           name="PlaceInfoPage" 
           component={PlaceInfoPage}
