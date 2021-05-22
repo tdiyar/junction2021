@@ -76,7 +76,10 @@ function CountryInfoPage({navigation, route}) {
     );
     
     return (
+        <ScrollView style={{height:'90%'}} >
         <View style={styles.container}>
+            
+
             <View style={styles.header}>
                 <AntIcon name='arrowleft' style={styles.back} size={35} onPress={() => navigation.navigate('Map')}/>
                 <View style={styles.imageContainer} onPress={() => alert('lsdfd')}>
@@ -89,7 +92,11 @@ function CountryInfoPage({navigation, route}) {
                     <Text style={styles.titleText}> South Korea </Text>
                 </View>
             </View>
+            
+            
             <View style={styles.separator}/>
+            
+
             <View style={styles.content}>
             <Text>
                 <Text style={styles.contentTitle}> Overview of Inclusivity Index </Text>    {'\n'}
@@ -104,10 +111,39 @@ function CountryInfoPage({navigation, route}) {
             </Text>
 
             </View>
+            {// here
+            }
+            <View style={styles.separator}/>
+
+            <View style={styles.content}>
+                <Text style={styles.contentTitle}> Visitor Reviews <Text style={{fontWeight: 'normal'}}>  </Text> </Text>    
+                
+                <View style={{alignSelf: 'center'}}>
+                    <StarRating
+                        disabled={false}
+                        maxStars={5}
+                        rating={starCount}
+                        selectedStar={(rating) => setStarCount(rating)}
+                    />
+                </View>
+                <TouchableOpacity
+                        style={{...styles.button, backgroundColor: 'orange', width: 'auto', alignSelf: 'center'}}
+                    >
+                        <FaIcon
+                            name='pencil'
+                            size={20}
+                            style={styles.buttonIcon}
+                        />
+                        <Text style={styles.buttonText}> Leave a review </Text>
+                </TouchableOpacity>
+            </View>
+            
+
+
             <View style={styles.separator}/>
             <View style={styles.content}>
                
-            <ScrollView style={{height:'40%'}} >
+            
             <DataTable>
 
               <DataTable.Header>
@@ -117,12 +153,12 @@ function CountryInfoPage({navigation, route}) {
               </DataTable.Header>
               {table}
             </DataTable>
-
-          </ScrollView>
     
-                
             </View>
+
         </View>
+
+        </ScrollView>
     );
 }
 
