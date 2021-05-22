@@ -8,7 +8,7 @@ import PercentSign from './PercentSign.js'
 
 import axios from "axios";
 
-export default function Map() {
+export default function Map({navigation}) {
   
   const [coordinate, setCoordinate] = useState( {longitudeDelta:200, latitudeDelta:300, latitude:36.3535152, longitude:127.3420604  }); 
 
@@ -21,13 +21,12 @@ export default function Map() {
 
   return (
     <View style={styles.container}>
-
       <MapView loadingEnabled={true} style={styles.map} 
       onRegionChangeComplete = {(e)=>{
         setCoordinate(e);
         
       } }
-
+      onPress={() => navigation.navigate('PlaceInfoPage', { place: 'KAIST' })}      
       provider={PROVIDER_GOOGLE}
       > 
 
@@ -55,9 +54,6 @@ export default function Map() {
           placeholderTextColor={'#666'}
         />
       </View>
-      
-      
-      
     </View>
   );
 }
@@ -66,6 +62,12 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   input: {
     position: 'absolute',
