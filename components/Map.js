@@ -1,26 +1,32 @@
 import React, {useState, useRef} from 'react';
 
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import Geocoder from 'react-native-geocoding';
+import MapView, {Callout, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+
 
 import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
 import PercentSign from './PercentSign.js'
+import FixModal from './FixModal.js'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-import axios from "axios";
+
 
 export default function Map({navigation}) {
   
   const [coordinate, setCoordinate] = useState( {longitudeDelta:200, latitudeDelta:300, latitude:36.3535152, longitude:127.3420604  }); 
-
+  const [modal, setModal] = useState(false );
 
   const nodes = [ {id:1, title:"comthign",  coordinate:{latitude:36.3533152, longitude:127.3420604} },
-  {id:2, title: "comthign",  coordinate:{latitude:36.3535152, longitude:127.3420604} },
-  { id:3,title: "comthign",  coordinate:{latitude:36.3532152, longitude:127.3430604} },
-  { id:4, title:"comthign",  coordinate:{latitude:36.3531152, longitude:127.3420614} },
+  {id:2, title: "comthign",  coordinate:{latitude:36.3535152, longitude:127.3450604} },
+  { id:3,title: "comthign",  coordinate:{latitude:36.3432152, longitude:127.1430604} },
+  { id:4, title:"comthign",  coordinate:{latitude:36.3131152, longitude:127.4420614} },
   ]
 
   return (
     <View style={styles.container}>
+
+
+      <FixModal modalVisible={modal}  setModalVisible ={setModal} />
+
       <MapView loadingEnabled={true} style={styles.map} 
       onRegionChangeComplete = {(e)=>{
         setCoordinate(e);
@@ -30,7 +36,9 @@ export default function Map({navigation}) {
       provider={PROVIDER_GOOGLE}
       > 
 
-        { nodes.map ( (place)=> <Marker key={place.id} title = {place.tile} coordinate={place.coordinate} />  ) }
+    { nodes.map ( (place)=> <Marker  onPress={() =>setModal(true)}  key={place.id} title = {place.tile} coordinate={place.coordinate} >
+    <Icon name="wrench" size={30} color="#900"    />
+    </Marker>  ) }
         
       </MapView>
 
