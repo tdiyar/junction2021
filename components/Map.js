@@ -50,25 +50,27 @@ export default function Map({navigation}) {
 
       <PercentSign coordinate = { coordinate }  >  </PercentSign>
       
-      <View style={styles.input}>
-        <TextInput
-          style={{
-            borderRadius: 10,
-            margin: 10,
-            color: '#000',
-            borderColor: '#666',
-            backgroundColor: '#FFF',
-            borderWidth: 1,
-            height: 45,
-            paddingHorizontal: 10,
-            fontSize: 18,
-          }}
-          placeholder={'Search'}
-          placeholderTextColor={'#666'}
-        />
-      </View>
-      <View style={styles.menu}>
-        <Icon name='menu' style = {{margin: 10, height: 45,}} onPress={() => navigation.openDrawer()}></Icon>
+      <View style={{top: 15, position: 'absolute', flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10} }>
+        <View>
+          <Icon name='menu' size={30} onPress={() => navigation.openDrawer()}></Icon>
+        </View>
+        <View style={styles.input}>
+          <TextInput
+            style={{
+              borderRadius: 10,
+              margin: 10,
+              color: '#000',
+              borderColor: '#666',
+              backgroundColor: '#FFF',
+              borderWidth: 1,
+              height: 45,
+              paddingHorizontal: 10,
+              fontSize: 18,
+            }}
+            placeholder={'Search'}
+            placeholderTextColor={'#666'}
+          />
+        </View>
       </View>
     </View>
   );
@@ -86,9 +88,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   input: {
-    position: 'absolute',
-    top: 30,
-    width: '90%',
+    // marginTop: 30,
+    // position: 'absolute',
+    // top: 30,
+    // width: '90%',
+    flex: 1
   },
   menu: {
     position: 'absolute',

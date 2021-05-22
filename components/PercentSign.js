@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import MapView, {Marker} from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, Alert, Modal, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Alert, Modal, Pressable, TouchableOpacity } from 'react-native';
 
 import axios from "axios";
 
@@ -34,57 +34,68 @@ export default function PercentSign({coordinate}) {
 
     const percentageCalc = ()=>{
         if (coordinate.longitudeDelta + coordinate.latitudeDelta > 18){
-            return "Choose a smaller region"
+            return "?"
         }
-        return 12+ Math.floor(((coordinate.latitude+coordinate.longitude + coordinate.longitudeDelta + coordinate.latitudeDelta) +4502 )%70) + '%';
+        return 12+ Math.floor(((coordinate.latitude+coordinate.longitude + coordinate.longitudeDelta + coordinate.latitudeDelta) +4502 )%70);
+    
+    }
+
+    const getColor = () => {
+        let tmp = percentageCalc();
+        if(tmp == '?') {
+          return 'lightgray';
+        } else if(parseInt(tmp) <= 20){
+          return 'red';
+        } else if(parseInt(tmp) >= 70) {
+          return '#228B22';
+        } else return 'orange';
     }
 
   return (
-    <View style={styles.container}>
+    <>
       <Text onPress={() => {
-          setModalVisible(true);
-          getAddress();
-          } } >  {percentageCalc()}    </Text>
+        setModalVisible(true);
+        getAddress();
+      }} style={{position: 'absolute', top: 80, left: 10, fontSize: 26, alignSelf: 'center', color: getColor(), fontWeight: 'bold'}}>  {percentageCalc()}    </Text>
 
       <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>
-                {
-                    address === undefined ? 
-                    <>
-                    No information is available for this region
-                    </>
-                    :
-                    <> 
-                    Friendlyness: {percentageCalc()} {"\n"}
-                    Country: {address.country} {"\n"}
-                    Region: {address.region} {"\n"}
-                    </>
-                }
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        Alert.alert("Modal has been closed.");
+        setModalVisible(!modalVisible);
+      }}
+    >
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>
+              {
+                  address === undefined ? 
+                  <>
+                  No information is available for this region
+                  </>
+                  :
+                  <> 
+                  Friendlyness: {percentageCalc()} {"\n"}
+                  Country: {address.country} {"\n"}
+                  Region: {address.region} {"\n"}
+                  </>
+              }
 
-                
-            </Text>
+              
+          </Text>
 
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide</Text>
-            </Pressable>
-          </View>
+          <Pressable
+            style={[styles.button, styles.buttonClose]}
+            onPress={() => setModalVisible(!modalVisible)}
+          >
+            <Text style={styles.textStyle}>Hide</Text>
+          </Pressable>
         </View>
-      </Modal>
-
-    </View>
+      </View>
+    </Modal>
+    </>
   );
 }
 
@@ -133,16 +144,17 @@ const styles = StyleSheet.create({
 
   container:{
     position: 'absolute',
-    top: 80,
-    width: 185,
-    borderRadius: 6,
-    margin: 10,
+    // top: 80,
+    // left: 10,
+    flexDirection: 'row',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     color: '#000',
     borderColor: '#666',
     backgroundColor: '#FFF',
     borderWidth: 1,
-    height: 25,
-    paddingHorizontal: 10,
-    fontSize: 18,
+    // alignItems: 'center',
+    justifyContent: 'center'
   },
 });
