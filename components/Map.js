@@ -2,15 +2,11 @@ import React, {useState} from 'react';
 
 import MapView, {Marker} from 'react-native-maps';
 
-<<<<<<< HEAD
-export default function Map({navigation}) {
-=======
 import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
 import PercentSign from './PercentSign.js'
 
->>>>>>> 80550d2ad4c913c85342fd4a8a33916ef2bbb2c4
 
-export default function Map() {
+export default function Map({navigation}) {
 
   const nodes = [ {id:1, title:"comthign",  coordinate:{latitude:36.3533152, longitude:127.3420604} },
   {id:2, title: "comthign",  coordinate:{latitude:36.3535152, longitude:127.3420604} },
@@ -52,9 +48,6 @@ export default function Map() {
           placeholderTextColor={'#666'}
         />
       </View>
-      
-      
-      
     </View>
   );
 }
