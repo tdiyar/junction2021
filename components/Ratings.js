@@ -13,7 +13,7 @@ export default function Ratings({navigation}) {
       <DataTable.Row>
         <DataTable.Cell>{entry.number}</DataTable.Cell>
         <DataTable.Cell>{entry.name}</DataTable.Cell>
-        <DataTable.Cell>{entry.index}</DataTable.Cell>
+        <DataTable.Cell>{((parseInt(entry.index) * 3413 + (parseInt(entry.index) + entry.name.length) * 1324637) % 71) + 12}</DataTable.Cell>
       </DataTable.Row>
     );
     return (
@@ -29,7 +29,7 @@ export default function Ratings({navigation}) {
             </DataTable>
           </ScrollView>
         <View style={styles.menu}>
-              <Icon name='menu' style = {{margin: 10, height: 45,}} size={30} onPress={() => navigation.openDrawer()}></Icon>
+              <Icon name='menu' size={30} onPress={() => navigation.openDrawer()}></Icon>
             </View>
         </View>
     );

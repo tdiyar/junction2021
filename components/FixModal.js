@@ -84,6 +84,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#F194FF",
       },
       buttonClose: {
+        marginTop: 15,
+        paddingLeft: 20,
+        paddingRight: 20,
         backgroundColor: "#2196F3",
       },
       textStyle: {

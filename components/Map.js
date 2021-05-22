@@ -8,6 +8,7 @@ import PercentSign from './PercentSign.js'
 
 import FixModal from './FixModal.js'
 import Icon_d from 'react-native-vector-icons/FontAwesome';
+import Icon_i from 'react-native-vector-icons/Ionicons';
 import { Icon } from 'react-native-elements'
 
 
@@ -16,6 +17,7 @@ export default function Map({navigation}) {
   
   const [coordinate, setCoordinate] = useState( {longitudeDelta:200, latitudeDelta:300, latitude:36.3535152, longitude:127.3420604  }); 
   const [modal, setModal] = useState(false );
+  const mapView = useRef();
 
   const nodes = [ 
   {id:1, title:"comthign",  coordinate:{latitude:36.3533152, longitude:127.3620604} },
@@ -25,7 +27,11 @@ export default function Map({navigation}) {
   {id:2, title: "comthign",  coordinate:{latitude:36.3535152, longitude:127.3450604} },
   { id:3,title: "comthign",  coordinate:{latitude:36.3432152, longitude:127.1430604} },
   { id:4, title:"comthign",  coordinate:{latitude:36.3131152, longitude:127.4420614} },
-  ]
+  ];
+
+  const my_nodes = [
+    // {id:10, title:"comthign",  coordinate:{latitude:36.36729832121694, longitude:127.36383978277443} }
+  ];
 
   return (
     <View style={styles.container}>
@@ -33,24 +39,34 @@ export default function Map({navigation}) {
 
       <FixModal modalVisible={modal}  setModalVisible ={setModal} />
 
-      <MapView loadingEnabled={true} style={styles.map} 
+      <MapView 
+      ref={mapView}
+      loadingEnabled={true} style={styles.map} 
       onRegionChangeComplete = {(e)=>{
         setCoordinate(e);
         
       } }
-      onPress={() => navigation.navigate('PlaceInfoPage', { place: 'KAIST' })}      
+      onPress={(e) => {
+        console.log(e.nativeEvent);
+        navigation.navigate('PlaceInfoPage', { place: 'KAIST' });
+      }
+      }      
       provider={PROVIDER_GOOGLE}
       > 
 
-    { nodes.map ( (place)=> <Marker  onPress={() =>setModal(true)}  key={place.id} title = {place.tile} coordinate={place.coordinate} >
+    { nodes.map ( (place)=> <Marker  onPress={(e) =>{e.stopPropagation(); setModal(true)}}  key={place.id} title = {place.tile} coordinate={place.coordinate} >
     <Icon_d name="wrench" size={30} color="#900"    />
+    </Marker>  ) }
+
+    { my_nodes.map ( (place)=> <Marker  onPress={(e) =>{e.stopPropagation(); setModal(true)}}  key={place.id} title = {place.tile} coordinate={place.coordinate} >
+    <Icon_i name="location-sharp" size={30} color="#900"    />
     </Marker>  ) }
         
       </MapView>
 
       <PercentSign coordinate = { coordinate }  >  </PercentSign>
       
-      <View style={{top: 15, position: 'absolute', flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10} }>
+      <View style={{top: 27, position: 'absolute', flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10} }>
         <View>
           <Icon name='menu' size={30} onPress={() => navigation.openDrawer()}></Icon>
         </View>
@@ -69,6 +85,23 @@ export default function Map({navigation}) {
             }}
             placeholder={'Search'}
             placeholderTextColor={'#666'}
+            onSubmitEditing={() => {
+              console.log(coordinate);
+              console.log('key pressed!');
+              console.log(mapView);
+              setCoordinate({
+                latitude:36.36729832121694, 
+                longitude:127.36383978277443,
+                longitudeDelta: 10,
+                latitudeDelta:10, 
+              })
+              mapView.current.animateToRegion({
+                latitude:36.36729832121694, 
+                longitude:127.36383978277443,
+                longitudeDelta: 0.01,
+                latitudeDelta:0.01, 
+              });
+            }}
           />
         </View>
       </View>
@@ -96,7 +129,7 @@ const styles = StyleSheet.create({
   },
   menu: {
     position: 'absolute',
-    top:40,
+    top:80,
     left:10,
     width:'10%',
   }

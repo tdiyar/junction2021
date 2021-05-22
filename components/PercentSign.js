@@ -43,7 +43,7 @@ export default function PercentSign({coordinate}) {
     const getColor = () => {
         let tmp = percentageCalc();
         if(tmp == '?') {
-          return 'lightgray';
+          return '#696969';
         } else if(parseInt(tmp) <= 20){
           return 'red';
         } else if(parseInt(tmp) >= 70) {
@@ -56,7 +56,7 @@ export default function PercentSign({coordinate}) {
       <Text onPress={() => {
         setModalVisible(true);
         getAddress();
-      }} style={{position: 'absolute', top: 80, left: 10, fontSize: 26, alignSelf: 'center', color: getColor(), fontWeight: 'bold'}}>  {percentageCalc()}    </Text>
+      }} style={{position: 'absolute', top: 90, left: 10, fontSize: 26, alignSelf: 'center', color: getColor(), fontWeight: 'bold'}}>  {percentageCalc()}    </Text>
 
       <Modal
       animationType="slide"
@@ -69,23 +69,19 @@ export default function PercentSign({coordinate}) {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>
-              {
-                  address === undefined ? 
-                  <>
-                  No information is available for this region
-                  </>
-                  :
-                  <> 
-                  Friendlyness: {percentageCalc()} {"\n"}
-                  Country: {address.country} {"\n"}
-                  Region: {address.region} {"\n"}
-                  </>
-              }
-
-              
-          </Text>
-
+          {
+            address === undefined 
+              ? (
+                <Text style={styles.modalText}> No information is available for this region </Text>
+              ) 
+              : (
+                <>
+                  <Text style={styles.modalText}> <Text style={{fontWeight: 'bold'}}> Inclusivity: </Text> {percentageCalc()} </Text>
+                  <Text style={styles.modalText}> <Text style={{fontWeight: 'bold'}}> Country: </Text> {address.country} </Text>
+                  <Text style={styles.modalText}> <Text style={{fontWeight: 'bold'}}> Region: </Text> {address.region} </Text>
+                </>
+              )
+          }
           <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}
@@ -130,6 +126,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#F194FF",
       },
       buttonClose: {
+        marginTop: 15,
+        paddingLeft: 20,
+        paddingRight: 20,
         backgroundColor: "#2196F3",
       },
       textStyle: {
@@ -138,8 +137,9 @@ const styles = StyleSheet.create({
         textAlign: "center"
       },
       modalText: {
-        marginBottom: 15,
-        textAlign: "center"
+        marginBottom: 5,
+        // textAlign: "center"
+        alignSelf: 'flex-start',
       },
 
   container:{
