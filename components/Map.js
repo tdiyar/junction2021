@@ -4,6 +4,7 @@ import MapView, {Marker} from 'react-native-maps';
 
 import { StyleSheet, Text, View, Dimensions, TextInput, Button } from 'react-native';
 import PercentSign from './PercentSign.js'
+import { Icon } from 'react-native-elements'
 
 
 export default function Map({navigation}) {
@@ -30,9 +31,6 @@ export default function Map({navigation}) {
         { nodes.map ( (place)=> <Marker key={place.id} title = {place.tile} coordinate={place.coordinate} />  ) }    
       </MapView>
       <PercentSign coordinate = { coordinate } >  </PercentSign>
-      <View style={styles.container}>
-        <Button onPress={() => navigation.openDrawer()} style={{}} title="SideBar"></Button>
-      </View>
       <View style={styles.input}>
         <TextInput
           style={{
@@ -49,6 +47,9 @@ export default function Map({navigation}) {
           placeholder={'Search'}
           placeholderTextColor={'#666'}
         />
+      </View>
+      <View style={styles.menu}>
+        <Icon name='menu' style = {{margin: 10, height: 45,}} onPress={() => navigation.openDrawer()}></Icon>
       </View>
     </View>
   );
@@ -68,6 +69,12 @@ const styles = StyleSheet.create({
   input: {
     position: 'absolute',
     top: 30,
-    width: '100%'
+    width: '90%',
   },
+  menu: {
+    position: 'absolute',
+    top:40,
+    left:10,
+    width:'10%',
+  }
 });

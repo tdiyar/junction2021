@@ -33,8 +33,8 @@ export default function App() {
       
       {/* <SidePanel/> */}
       <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen name="Notifications" component={Ratings} />
             <Drawer.Screen name="Map" component={Stacks} />
+            <Drawer.Screen name="Ratings" component={Ratings} />
       </Drawer.Navigator>
     </NavigationContainer>
       
