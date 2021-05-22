@@ -7,12 +7,21 @@ import Map from './components/Map.js'
 export default function App() {
 
   return (
-    <Map></Map>
+    <View style={styles.container}>  
+      <Map />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-
-
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: "bold"
+  }
 });
-
